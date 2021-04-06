@@ -33,7 +33,7 @@ const App = () => {
       .then((result) => {
         if (result.status === 400) {
           setError(`${result.error}
-          Sorry, try again later.`);
+          Sorry, try again later (up to 1 hour)`);
         } else {
           setCurrencies(result);
           setCurrenciesLoaded(true);
