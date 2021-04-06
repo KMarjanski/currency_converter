@@ -29,28 +29,38 @@ const App = () => {
 
   useEffect(() => {
     fetch(currenciesURL)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        else return res.json();
+      })
       .then((result) => {
-        if (result.status === 400) {
-          setError(`${result.error}
-          Sorry, try again later (up to 1 hour)`);
-        } else {
-          setCurrencies(result);
-          setCurrenciesLoaded(true);
-        }
+        setCurrencies(result);
+        setCurrenciesLoaded(true);
+      })
+      .catch((error) => {
+        if (error.toString() === "Error: 400") {
+          setError(
+            `Sorry... Free API limit reached, try again later (up to 1 hour)`
+          );
+        } else setError(error.toString());
       });
 
     fetch(convertURL)
       .then(setConvertionObjectLoaded(false))
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        else return res.json();
+      })
       .then((result) => {
-        if (result.status === 400) {
-          setError(`${result.error}
-          Sorry, try again later (up to 1 hour)`);
-        } else {
-          setConvertionObject(result);
-          setConvertionObjectLoaded(true);
-        }
+        setConvertionObject(result);
+        setConvertionObjectLoaded(true);
+      })
+      .catch((error) => {
+        if (error.toString() === "Error: 400") {
+          setError(
+            `Sorry... Free API limit reached, try again later (up to 1 hour)`
+          );
+        } else setError(error.toString());
       });
   }, [convertURL]);
 
