@@ -3,4 +3,5 @@ button.changeButton {
   position: absolute;
   top: 25%;
   margin-left: 0.5rem;
+  border-radius: 20px;
 }
