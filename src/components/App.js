@@ -41,6 +41,7 @@ const App = () => {
       });
 
     fetch(convertURL)
+      .then(setConvertionObjectLoaded(false))
       .then((res) => res.json())
       .then((result) => {
         if (result.status === 400) {
@@ -86,7 +87,11 @@ const App = () => {
   ) : null;
 
   const componentInfo = convertionObjectLoaded ? (
-    <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
+    currenciesLoaded ? (
+      <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
+    ) : null
+  ) : currenciesLoaded ? (
+    "Loading..."
   ) : null;
 
   return (
