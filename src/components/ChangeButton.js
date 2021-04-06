@@ -9,7 +9,7 @@ const Button = ({ from, to, setFrom, setTo }) => {
   };
   return (
     <button onClick={handleOnClick} className="changeButton">
-      Change
+      ⇅
     </button>
   );
 };
