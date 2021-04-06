@@ -1,0 +1,6 @@
+button.changeButton {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  margin-left: 0.5rem;
+}
