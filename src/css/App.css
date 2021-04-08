@@ -1,4 +1,32 @@
 html {
+  font-size: 16px;
+}
+
+@media (min-width: 576px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 32px;
+  }
+}
+
+body {
   text-align: center;
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
@@ -9,16 +37,14 @@ html {
   );
 }
 
-body {
-  position: absolute;
-  top: 25%;
-  width: 100%;
+#root {
+  min-height: 100vh;
 }
 
-h1 {
-  margin: 1rem;
+.mh-100vh {
+  min-height: 100vh !important;
 }
 
-div.wrapper {
-  position: relative;
+.pr-21 {
+  padding-right: 0.1875rem !important;
 }

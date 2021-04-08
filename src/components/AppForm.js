@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, Col } from "react-bootstrap";
 import CurrencySelectItem from "./CurrencySelectItem";
 import "../css/AppForm.css";
 
@@ -21,27 +21,33 @@ const AppForm = ({
   return (
     <Form onSubmit={handleOnClick}>
       <Form.Row>
-        <Form.Control
-          type="text"
-          value={fromAmount}
-          min={0}
-          onChange={(e) => setFromAmount(e.target.value)}
-        />
-        <CurrencySelectItem
-          currencies={currencies}
-          value={from}
-          setValue={setFrom}
-          onChange={calculateConvertion()}
-        />
-      </Form.Row>
-      <Form.Row>
-        <Form.Control type="text" value={convertion} readOnly />
-        <CurrencySelectItem
-          currencies={currencies}
-          value={to}
-          setValue={setTo}
-          onChange={calculateConvertion()}
-        />
+        <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
+          <Form.Control
+            type="text"
+            value={fromAmount}
+            min={0}
+            onChange={(e) => setFromAmount(e.target.value)}
+          />
+        </Col>
+        <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
+          <CurrencySelectItem
+            currencies={currencies}
+            value={from}
+            setValue={setFrom}
+            onChange={calculateConvertion()}
+          />
+        </Col>
+        <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
+          <Form.Control type="text" value={convertion} readOnly />
+        </Col>
+        <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
+          <CurrencySelectItem
+            currencies={currencies}
+            value={to}
+            setValue={setTo}
+            onChange={calculateConvertion()}
+          />
+        </Col>
       </Form.Row>
     </Form>
   );

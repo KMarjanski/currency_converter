@@ -1,17 +1,4 @@
-button.changeButton {
-  display: inline-block;
-  position: absolute;
-  top: 25%;
-  margin-left: 0.5rem;
-  border-radius: 20px;
-  border: 1px solid transparent;
-}
-
-button.changeButton:focus {
-  outline: none;
-  border: 1px solid rgba(0, 255, 0, 0.5);
-}
-
-button.changeButton:active {
-  background-color: rgba(255, 255, 255, 0.75);
+.changeButton {
+  font-size: 2rem !important;
+  height: 100% !important;
 }

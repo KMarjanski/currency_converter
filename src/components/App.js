@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container, Col, Row } from "react-bootstrap";
 import Form from "./AppForm";
 import "../css/App.css";
 import ChangeButton from "./ChangeButton";
@@ -101,18 +102,37 @@ const App = () => {
       <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
     ) : null
   ) : currenciesLoaded ? (
-    "Loading..."
+    <Col className="text-center">Loading...</Col>
   ) : null;
 
   return (
-    <>
-      <h1>Currency converter</h1>
-      <div className="wrapper">
-        {componentForm}
-        {componentButton}
-      </div>
-      {componentInfo}
-    </>
+    <Container className="mh-100vh" fluid>
+      <Row className="mh-100vh">
+        <Col className="my-auto">
+          <Row>
+            <Col className="text-center mb-3">
+              <h1>Currency converter</h1>
+            </Col>
+          </Row>
+          <Row className="justify-content-center mb-3">
+            <Col
+              style={{ maxWidth: "15.5rem", minWidth: "15.5rem" }}
+              xs="7"
+              sm="5"
+              md="3"
+              xl="2"
+              className="pl-2 pr-21"
+            >
+              {componentForm}
+            </Col>
+            <Col className="p-0 m-0 mb-1" xs="auto">
+              {componentButton}
+            </Col>
+          </Row>
+          <Row>{componentInfo}</Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
