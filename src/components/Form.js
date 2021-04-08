@@ -1,8 +1,9 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 import CurrencySelectItem from "./CurrencySelectItem";
 import "../css/Form.css";
 
-const Form = ({
+const AppForm = ({
   currencies,
   from,
   to,
@@ -18,30 +19,32 @@ const Form = ({
     calculateConvertion();
   };
   return (
-    <form onSubmit={handleOnClick}>
-      <input
-        type="text"
-        value={fromAmount}
-        min={0}
-        onChange={(e) => setFromAmount(e.target.value)}
-      />
-      <CurrencySelectItem
-        currencies={currencies}
-        value={from}
-        setValue={setFrom}
-        onChange={calculateConvertion()}
-      />
-      <br />
-      <input type="text" value={convertion} disabled />
-      <CurrencySelectItem
-        currencies={currencies}
-        value={to}
-        setValue={setTo}
-        onChange={calculateConvertion()}
-      />
-      <br />
-    </form>
+    <Form onSubmit={handleOnClick}>
+      <Form.Row>
+        <Form.Control
+          type="text"
+          value={fromAmount}
+          min={0}
+          onChange={(e) => setFromAmount(e.target.value)}
+        />
+        <CurrencySelectItem
+          currencies={currencies}
+          value={from}
+          setValue={setFrom}
+          onChange={calculateConvertion()}
+        />
+      </Form.Row>
+      <Form.Row>
+        <Form.Control type="text" value={convertion} readOnly />
+        <CurrencySelectItem
+          currencies={currencies}
+          value={to}
+          setValue={setTo}
+          onChange={calculateConvertion()}
+        />
+      </Form.Row>
+    </Form>
   );
 };
 
-export default Form;
+export default AppForm;

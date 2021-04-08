@@ -1,4 +1,5 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 const CurrencySelectItem = ({ currencies, value, setValue }) => {
   const objectArr = Object.keys(currencies)
@@ -9,9 +10,13 @@ const CurrencySelectItem = ({ currencies, value, setValue }) => {
       </option>
     ));
   return (
-    <select value={value} onChange={(e) => setValue(e.currentTarget.value)}>
+    <Form.Control
+      as="select"
+      value={value}
+      onChange={(e) => setValue(e.currentTarget.value)}
+    >
       {objectArr}
-    </select>
+    </Form.Control>
   );
 };
 
