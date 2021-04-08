@@ -35,12 +35,10 @@ const App = () => {
         else return res.json();
       })
       .then((result) => {
-        console.log("shot from currencies");
         setCurrencies(result);
         setCurrenciesLoaded(true);
       })
       .catch((error) => {
-        debugger;
         if (error.toString() === "Error: 400") {
           setError(
             `Sorry... Free API limit reached, try again later (up to 1 hour)`
@@ -57,7 +55,6 @@ const App = () => {
         else return res.json();
       })
       .then((result) => {
-        console.log("shot from convertion");
         setConvertionObject(result);
         setConvertionObjectLoaded(true);
       });
