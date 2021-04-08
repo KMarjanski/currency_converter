@@ -3,6 +3,7 @@ import { Container, Col, Row } from "react-bootstrap";
 import Form from "./AppForm";
 import "../css/App.css";
 import ChangeButton from "./ChangeButton";
+import ConvertButton from "./ConvertButton";
 import Info from "./Info";
 
 const apiKey = "75603abb0998080373c2";
@@ -17,16 +18,15 @@ const App = () => {
   const [currenciesLoaded, setCurrenciesLoaded] = useState(false);
   const [fromAmount, setFromAmount] = useState(0);
   const [convertion, setConvertion] = useState(0);
+  const [convertURL, setConvertURL] = useState("");
   const [error, setError] = useState("Loading...");
 
   let objNameArr = convertionObjectLoaded
     ? Object.keys(convertionObject).map((item) => item)
-    : "123";
+    : "";
   let objValuesArr = convertionObjectLoaded
     ? Object.values(convertionObject).map((item) => item)
-    : "123";
-
-  let convertURL = `https://free.currconv.com/api/v7/convert?q=${from}_${to},${to}_${from}&compact=ultra&apiKey=${apiKey}`;
+    : "";
 
   useEffect(() => {
     fetch(currenciesURL)
@@ -35,17 +35,21 @@ const App = () => {
         else return res.json();
       })
       .then((result) => {
+        console.log("shot from currencies");
         setCurrencies(result);
         setCurrenciesLoaded(true);
       })
       .catch((error) => {
+        debugger;
         if (error.toString() === "Error: 400") {
           setError(
             `Sorry... Free API limit reached, try again later (up to 1 hour)`
           );
         } else setError(error.toString());
       });
+  }, []);
 
+  useEffect(() => {
     fetch(convertURL)
       .then(setConvertionObjectLoaded(false))
       .then((res) => {
@@ -53,15 +57,9 @@ const App = () => {
         else return res.json();
       })
       .then((result) => {
+        console.log("shot from convertion");
         setConvertionObject(result);
         setConvertionObjectLoaded(true);
-      })
-      .catch((error) => {
-        if (error.toString() === "Error: 400") {
-          setError(
-            `Sorry... Free API limit reached, try again later (up to 1 hour)`
-          );
-        } else setError(error.toString());
       });
   }, [convertURL]);
 
@@ -85,6 +83,7 @@ const App = () => {
       setFrom={setFrom}
       setTo={setTo}
       fromAmount={fromAmount}
+      setConvertionObjectLoaded={setConvertionObjectLoaded}
       setFromAmount={setFromAmount}
       calculateConvertion={calculateConvertion}
       convertion={convertion}
@@ -93,7 +92,7 @@ const App = () => {
     <h2>{error}</h2>
   );
 
-  const componentButton = currenciesLoaded ? (
+  const componentChangeButton = currenciesLoaded ? (
     <ChangeButton from={from} to={to} setFrom={setFrom} setTo={setTo} />
   ) : null;
 
@@ -102,7 +101,17 @@ const App = () => {
       <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
     ) : null
   ) : currenciesLoaded ? (
-    <Col className="text-center">Loading...</Col>
+    <Col className="text-center">Convert...</Col>
+  ) : null;
+
+  const componentConvertButton = currenciesLoaded ? (
+    <ConvertButton
+      apiKey={apiKey}
+      from={from}
+      to={to}
+      calculateConvertion={calculateConvertion}
+      setConvertURL={setConvertURL}
+    />
   ) : null;
 
   return (
@@ -126,8 +135,11 @@ const App = () => {
               {componentForm}
             </Col>
             <Col className="p-0 m-0 mb-1" xs="auto">
-              {componentButton}
+              {componentChangeButton}
             </Col>
+          </Row>
+          <Row>
+            <Col className="text-center mb-3">{componentConvertButton}</Col>
           </Row>
           <Row>{componentInfo}</Row>
         </Col>

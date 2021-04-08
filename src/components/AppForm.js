@@ -12,14 +12,15 @@ const AppForm = ({
   fromAmount,
   setFromAmount,
   calculateConvertion,
+  setConvertionObjectLoaded,
   convertion,
 }) => {
-  const handleOnClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    calculateConvertion();
   };
+
   return (
-    <Form onSubmit={handleOnClick}>
+    <Form onSubmit={handleSubmit}>
       <Form.Row>
         <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
           <Form.Control
@@ -31,6 +32,7 @@ const AppForm = ({
         </Col>
         <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
           <CurrencySelectItem
+            setConvertionObjectLoaded={setConvertionObjectLoaded}
             currencies={currencies}
             value={from}
             setValue={setFrom}
@@ -42,6 +44,7 @@ const AppForm = ({
         </Col>
         <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
           <CurrencySelectItem
+            setConvertionObjectLoaded={setConvertionObjectLoaded}
             currencies={currencies}
             value={to}
             setValue={setTo}
