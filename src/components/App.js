@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Form from "./AppForm";
 import "../css/App.css";
@@ -20,6 +20,8 @@ const App = () => {
   const [convertion, setConvertion] = useState(0);
   const [convertURL, setConvertURL] = useState("");
   const [error, setError] = useState("Loading...");
+
+  const isInitalMount = useRef(true);
 
   let objNameArr = convertionObjectLoaded
     ? Object.keys(convertionObject).map((item) => item)
@@ -48,16 +50,27 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetch(convertURL)
-      .then(setConvertionObjectLoaded(false))
-      .then((res) => {
-        if (!res.ok) throw new Error(res.status);
-        else return res.json();
-      })
-      .then((result) => {
-        setConvertionObject(result);
-        setConvertionObjectLoaded(true);
-      });
+    if (isInitalMount.current) {
+      isInitalMount.current = false;
+    } else {
+      fetch(convertURL)
+        .then(setConvertionObjectLoaded(false))
+        .then((res) => {
+          if (!res.ok) throw new Error(res.status);
+          else return res.json();
+        })
+        .then((result) => {
+          setConvertionObject(result);
+          setConvertionObjectLoaded(true);
+        })
+        .catch((error) => {
+          if (error.toString() === "Error: 400") {
+            setError(
+              `Sorry... Free API limit reached, try again later (up to 1 hour)`
+            );
+          } else setError(error.toString());
+        });
+    }
   }, [convertURL]);
 
   const calculateConvertion = () => {
