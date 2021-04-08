@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import CurrencySelectItem from "./CurrencySelectItem";
-import "../css/Form.css";
+import "../css/AppForm.css";
 
 const AppForm = ({
   currencies,

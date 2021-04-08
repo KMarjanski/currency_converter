@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
+import Form from "./AppForm";
 import "../css/App.css";
 import ChangeButton from "./ChangeButton";
 import Info from "./Info";
