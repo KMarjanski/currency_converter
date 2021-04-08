@@ -107,11 +107,7 @@ const App = () => {
   ) : null;
 
   const componentInfo = convertionObjectLoaded ? (
-    currenciesLoaded ? (
-      <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
-    ) : null
-  ) : currenciesLoaded ? (
-    <Col className="text-center">Convert...</Col>
+    <Info Values={objValuesArr} Name={objNameArr} from={from} to={to} />
   ) : null;
 
   const componentConvertButton = currenciesLoaded ? (
