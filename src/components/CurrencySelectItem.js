@@ -1,22 +1,27 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import Select from "react-select";
 
 const CurrencySelectItem = ({ currencies, value, setValue }) => {
   const objectArr = Object.keys(currencies)
     .sort()
-    .map((key) => (
-      <option key={key} value={key}>
-        {key}
-      </option>
-    ));
+    .map((key) => ({ value: key, label: key }));
+
+  const styles = {
+    control: (styles) => ({
+      ...styles,
+      height: "2.3125rem",
+      borderRadius: ".25rem",
+    }),
+  };
+
   return (
-    <Form.Control
-      as="select"
+    <Select
       value={value}
-      onChange={(e) => setValue(e.currentTarget.value)}
-    >
-      {objectArr}
-    </Form.Control>
+      defaultInputValue={value}
+      options={objectArr}
+      onChange={(e) => setValue(e.value)}
+      styles={styles}
+    />
   );
 };
 
