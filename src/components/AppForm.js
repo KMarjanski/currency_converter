@@ -36,7 +36,7 @@ const AppForm = ({
             currencies={currencies}
             value={from}
             setValue={setFrom}
-            onChange={calculateConvertion()}
+            onChange={() => calculateConvertion()}
           />
         </Col>
         <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
@@ -48,7 +48,7 @@ const AppForm = ({
             currencies={currencies}
             value={to}
             setValue={setTo}
-            onChange={calculateConvertion()}
+            onChange={() => calculateConvertion()}
           />
         </Col>
       </Form.Row>

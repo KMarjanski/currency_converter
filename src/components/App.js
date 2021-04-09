@@ -73,6 +73,7 @@ const App = () => {
     }
   }, [convertURL]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const calculateConvertion = () => {
     let convertionCount = 0;
 
@@ -84,6 +85,10 @@ const App = () => {
 
     setConvertion((fromAmount * convertionCount).toFixed(2));
   };
+
+  useEffect(() => {
+    calculateConvertion();
+  }, [calculateConvertion]);
 
   const componentForm = currenciesLoaded ? (
     <Form
