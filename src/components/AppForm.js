@@ -24,7 +24,7 @@ const AppForm = ({
       <Form.Row>
         <Col className="m-0 mb-1 p-0 pr-1" xs="12" sm="6">
           <Form.Control
-            type="text"
+            type="number"
             value={fromAmount}
             min={0}
             onChange={(e) => setFromAmount(e.target.value)}
